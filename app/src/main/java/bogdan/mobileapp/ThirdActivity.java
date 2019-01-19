@@ -2,7 +2,9 @@ package bogdan.mobileapp;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -12,6 +14,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
+
+import java.net.URI;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -44,7 +48,7 @@ private static final int REQUEST_CAMERA=1;
         ActivityCompat.requestPermissions(this, new String[]{CAMERA}, REQUEST_CAMERA);
     }
 
-    public void onRequestPermissionResult(int requestCode, String permission[], int grantResult[]){
+    public void onRequestPermissionsResult(int requestCode, String permission[], int grantResult[]){
         switch(requestCode){
             case REQUEST_CAMERA:
                 if(grantResult.length>0){
@@ -93,6 +97,13 @@ private static final int REQUEST_CAMERA=1;
            }
        }
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        scannerView.stopCamera();
+
+    }
     public void displayAlertMessage(String message, DialogInterface.OnClickListener listener){
         new AlertDialog.Builder(ThirdActivity.this)
                 .setMessage(message)
@@ -104,10 +115,25 @@ private static final int REQUEST_CAMERA=1;
     }
 
 
-
-
     @Override
     public void handleResult(Result result) {
-
+final String scanResult=result.getText();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Rezultatul scanarii");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                scannerView.resumeCameraPreview(ThirdActivity.this);
+            }
+        });
+        builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(Intent.ACTION_VIEW , Uri.parse(scanResult));
+                startActivity(intent);
+            }
+        });
+        AlertDialog alert=builder.create();
+        alert.show();
     }
 }
