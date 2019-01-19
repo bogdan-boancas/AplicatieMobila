@@ -117,7 +117,7 @@ private static final int REQUEST_CAMERA=1;
 
     @Override
     public void handleResult(Result result) {
-final String scanResult=result.getText();
+        final String scanResult=result.getText();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Rezultatul scanarii");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
