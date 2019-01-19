@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Info = (TextView)findViewById(R.id.tvInfo);
         Login= (Button)findViewById(R.id.btnLogin);
         /*end*/
-
+Info.seText("Incercari ramase: 5");
 
         /*validam stringurile*/
 
@@ -49,7 +49,10 @@ public class MainActivity extends AppCompatActivity {
         }
         /*daca nu dezactivam butonul de login cand variabila counter ajunge la 0*/
         else{
+
             counter--;
+            Info.setText("Incercari ramase:" + String.valueOf(counter));
+
             if(counter == 0){
                 Login.setEnabled(false);
 
