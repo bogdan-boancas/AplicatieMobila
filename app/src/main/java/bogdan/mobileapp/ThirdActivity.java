@@ -75,6 +75,24 @@ private static final int REQUEST_CAMERA=1;
             break;
         }
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+       if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+           if(checkPermission()){
+               if(scannerView==null){
+                   scannerView = new ZXingScannerView(this);
+                   setContentView(scannerView);
+               }
+               scannerView.setResultHandler(this);
+               scannerView.startCamera();
+           }
+           else{
+               requestPermissions();
+           }
+       }
+    }
     public void displayAlertMessage(String message, DialogInterface.OnClickListener listener){
         new AlertDialog.Builder(ThirdActivity.this)
                 .setMessage(message)
