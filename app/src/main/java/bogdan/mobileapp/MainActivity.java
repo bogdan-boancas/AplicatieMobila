@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Info = (TextView)findViewById(R.id.tvInfo);
         Login= (Button)findViewById(R.id.btnLogin);
         /*end*/
-Info.seText("Incercari ramase: 5");
+Info.setText("Incercari ramase: 5");
 
         /*validam stringurile*/
 
@@ -43,7 +43,7 @@ Info.seText("Incercari ramase: 5");
     }
 /*daca user si parola sunt egale cu ce e definit, intram in "second activity'*/
     private void validate(String userName, String userPassword){
-        if((userName == "Admin") && (userPassword == "1234")){
+        if((userName.equals("Admin")) && (userPassword.equals("1234"))){
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
             startActivity(intent);
         }
