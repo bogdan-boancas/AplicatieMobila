@@ -79,7 +79,7 @@ private static final int REQUEST_CAMERA=1;
             break;
         }
     }
-
+    /*apelam scannerul "zxing scanner" dupa ce permissile au fost acceptate*/
     @Override
     public void onResume(){
         super.onResume();
@@ -97,6 +97,7 @@ private static final int REQUEST_CAMERA=1;
            }
        }
     }
+/*oprim camera cand pe onDestroy*/
 
     @Override
     public void onDestroy(){
@@ -114,7 +115,7 @@ private static final int REQUEST_CAMERA=1;
 
     }
 
-
+/*functie pentru rezultatele scanarii qr*/
     @Override
     public void handleResult(Result result) {
         final String scanResult=result.getText();
@@ -133,7 +134,7 @@ private static final int REQUEST_CAMERA=1;
                 startActivity(intent);
             }
         });
-        /*rezultate scanare qr code*/
+        /*apelam rezultate scanare qr code*/
         builder.setMessage(scanResult);
         AlertDialog alert=builder.create();
         alert.show();
