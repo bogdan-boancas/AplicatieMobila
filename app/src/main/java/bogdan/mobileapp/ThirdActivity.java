@@ -133,6 +133,7 @@ private static final int REQUEST_CAMERA=1;
                 startActivity(intent);
             }
         });
+        /*rezultate scanare qr code*/
         builder.setMessage(scanResult);
         AlertDialog alert=builder.create();
         alert.show();
